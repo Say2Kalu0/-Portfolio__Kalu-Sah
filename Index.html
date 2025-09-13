@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portfolio - Kalu Sah</title>
+<style>
+  :root{
+    --bg1: #071026; --bg2:#09233a;
+    --accent: #06b6d4;
+    --card:#0f1724;
+    --muted: #9ca3af;
+    --glass: rgba(255,255,255,0.04);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(120deg,var(--bg1),var(--bg2));color:#e6eef8}
+  body{background-size: 300% 300%; animation: bgShift 18s ease infinite; display:flex;align-items:center;justify-content:center;padding:28px}
+  @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  .wrap{max-width:1100px;width:100%;display:grid;grid-template-columns: 360px 1fr;gap:28px;align-items:start}
+  @media (max-width:900px){ .wrap{grid-template-columns:1fr; padding:18px} }
+
+  .card-stage{perspective:1200px}
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:18px;padding:20px; width:100%;
+    box-shadow: 0 30px 60px rgba(2,6,23,0.6);
+    transform-style:preserve-3d; transition: transform 350ms cubic-bezier(.2,.9,.2,1);
+    position:relative;
+  }
+  .card:hover{ transform: translateY(-10px) rotateX(6deg) rotateY(-6deg) }
+
+  /* Profile avatar with rounded 3D glow + pulsing animation */
+  .avatar{
+    width:110px;height:110px;border-radius:50%;overflow:hidden;
+    box-shadow: 0 0 0 4px rgba(6,182,212,0.6), 0 8px 25px rgba(6,182,212,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: pulseGlow 4s infinite ease-in-out;
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+  .avatar:hover{
+    transform: scale(1.08) rotateY(8deg);
+    box-shadow: 0 0 20px rgba(6,182,212,0.9), 0 20px 40px rgba(124,58,237,0.6);
+  }
+  @keyframes pulseGlow{
+    0% { box-shadow: 0 0 0 4px rgba(6,182,212,0.6), 0 8px 25px rgba(6,182,212,0.4); }
+    50% { box-shadow: 0 0 12px 6px rgba(6,182,212,0.9), 0 12px 35px rgba(124,58,237,0.6); }
+    100% { box-shadow: 0 0 0 4px rgba(6,182,212,0.6), 0 8px 25px rgba(6,182,212,0.4); }
+  }
+
+  .h1{font-size:20px;font-weight:700;margin:8px 0 2px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:8px}
+
+  .contact-line{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .pill{background:var(--glass);padding:8px 10px;border-radius:10px;font-size:13px}
+
+  .panel{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+    border-radius:18px;padding:18px; box-shadow: 0 20px 40px rgba(2,6,23,0.5);
+  }
+
+  .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .nav button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 12px;border-radius:10px;cursor:pointer}
+  .nav button.active{border-color:var(--accent);color:var(--accent);box-shadow:0 6px 18px rgba(6,182,212,0.06)}
+
+  h2{margin:10px 0;font-size:18px}
+  .muted{color:var(--muted);font-size:14px}
+  .exp-item{margin-bottom:12px;padding-bottom:8px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+  .roles{font-weight:600}
+  ul.pl{padding-left:18px;margin:6px 0 12px;color:var(--muted)}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+
+  .actions{display:flex;gap:10px;margin-top:12px}
+  .btn{background:var(--accent);color:#061220;padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px 14px;border-radius:10px;cursor:pointer}
+
+  .decor{position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(124,58,237,0.12), rgba(6,182,212,0.06));filter:blur(18px);z-index:0}
+  @media (max-width:900px){ .decor{display:none} }
+
+  .meta-row{display:flex;gap:10px;align-items:center}
+  .small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app">
+  <div class="card-stage">
+    <div class="card">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="avatar"><img src="Kalu.jpg" alt="Profile picture of Kalu Sah"></div>
+        <div style="flex:1">
+          <div class="h1">Kalu Sah</div>
+          <div class="sub">Project Manager — Telecom (Infra / MIS / ERP)</div>
+          <div class="contact-line small">
+            <div class="pill">Delhi</div>
+            <div class="pill">+91 7428942039</div>
+            <div class="pill">kalusah74@gmail.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="muted">Professional summary</div>
+        <div style="margin-top:8px">
+          <p style="margin:0;color:#dbeafe">
+            Experienced professional with 4+ years in MIS reporting, project coordination and project management in the telecom industry. Skilled in Advanced Excel, ERP and IMAPP; proven in project planning, team coordination, budget control and quality assurance.
+          </p>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="/CV%20Kalu%20Sah.pdf" download>Download CV</a>
+          <button class="ghost" onclick="scrollToSection('contact')">Contact</button>
+        </div>
+      </div>
+
+      <div class="decor" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:2">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;flex-direction:column">
+          <div style="font-weight:700;font-size:20px">Portfolio</div>
+          <div class="small">Interactive 3D resume & highlights</div>
+        </div>
+        <div class="meta-row small">
+          <div>📅 Available: Immediately</div>
+        </div>
+      </div>
+
+      <nav class="nav" style="margin-top:14px">
+        <button class="active" data-section="about" onclick="showTab(event,'about')">About</button>
+        <button data-section="experience" onclick="showTab(event,'experience')">Experience</button>
+        <button data-section="skills" onclick="showTab(event,'skills')">Skills</button>
+        <button data-section="education" onclick="showTab(event,'education')">Education</button>
+        <button data-section="certs" onclick="showTab(event,'certs')">Certifications</button>
+      </nav>
+
+      <section id="about">
+        <h2>About</h2>
+        <p class="muted">I am a telecom project professional with practical experience across Indus Towers projects — NB, O&M — handling planning, vendor coordination, ERP operations and MIS reporting. I focus on delivering projects on time and improving reporting processes.</p>
+
+        <h2 style="margin-top:16px">Highlights</h2>
+        <ul class="pl">
+          <li>Project planning & execution for Indus Towers NB & O&M projects.</li>
+          <li>Advanced MIS reporting and dashboards using Excel.</li>
+          <li>Familiar with IMAPP (PTW, iDeploy, JMS) and Indus ERP processes.</li>
+        </ul>
+      </section>
+
+      <section id="experience" style="display:none">
+        <h2>Experience</h2>
+        <div class="exp-item">
+          <div class="roles">Project Manager — Infra Akashvision Tower Pvt. Ltd. <span class="small" style="float:right">Dec 2024 — Present</span></div>
+          <div class="muted">Delhi</div>
+          <ul class="pl">
+            <li>Plan & deliver NB and O&M telecom projects; manage teams and vendors.</li>
+            <li>Budget control, quality assurance, site handover and WCC/PO/Invoice handling on Indus ERP.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="roles">Project Coordinator — Infra Akashvision Tower Pvt. Ltd. <span class="small" style="float:right">Jan 2024 — Nov 2024</span></div>
+          <div class="muted">Delhi</div>
+          <ul class="pl">
+            <li>Prepared MIS reports & supported project scheduling and execution.</li>
+            <li>Handled material dispatch, SRN/MRN process, measurement sheets and quotations.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="roles">MIS Executive — Infra Akashvision Tower Pvt. Ltd. <span class="small" style="float:right">Dec 2019 — Dec 2023</span></div>
+          <div class="muted">Delhi</div>
+          <ul class="pl">
+            <li>Daily progress reports, expense tracking, e-way bill generation and project tracker maintenance.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="skills" style="display:none">
+        <h2>Skills</h2>
+        <div class="chips" style="margin-bottom:12px">
+          <div class="chip">Advanced Excel</div>
+          <div class="chip">ERP (Indus)</div>
+          <div class="chip">IMAPP (PTW, iDeploy, JMS)</div>
+          <div class="chip">Project Planning</div>
+          <div class="chip">Team Management</div>
+          <div class="chip">SQL</div>
+          <div class="chip">Java / C / C++</div>
+        </div>
+
+        <h2 style="margin-top:12px">Tools & Platforms</h2>
+        <div class="chips">
+          <div class="chip">MS Excel</div>
+          <div class="chip">VS Code</div>
+          <div class="chip">MySQL</div>
+          <div class="chip">Indus ERP</div>
+        </div>
+      </section>
+
+      <section id="education" style="display:none">
+        <h2>Education</h2>
+        <div class="exp-item">
+          <div class="roles">BCA — IGNOU <span class="small" style="float:right">Final year (Completing 2025)</span></div>
+          <div class="muted">12th — NIOS (2021) · 10th — CBSE (2017)</div>
+        </div>
+      </section>
+
+      <section id="certs" style="display:none">
+        <h2>Certifications</h2>
+        <ul class="pl">
+          <li>ADCA</li>
+          <li>SQL</li>
+          <li>MS Office Suite</li>
+          <li>Advanced Excel</li>
+        </ul>
+      </section>
+
+      <section id="contact" style="margin-top:14px">
+        <h2>Contact</h2>
+        <div class="muted">Let's connect — I'm open to project & job opportunities in telecom project management.</div>
+        <div style="margin-top:10px" class="small">
+          <div><strong>Email:</strong> kalusah74@gmail.com</div>
+          <div><strong>Phone:</strong> +91 7428942039</div>
+          <div style="margin-top:8px"><a class="ghost" href="https://www.linkedin.com/in/kalu-sah-1a419821b" target="_blank" rel="noopener">LinkedIn profile</a></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(ev, id){
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    ev.currentTarget.classList.add('active');
+    document.querySelectorAll('section[id]').forEach(s=>s.style.display='none');
+    document.getElementById(id).style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.addEventListener('DOMContentLoaded', ()=> {
+    document.getElementById('about').style.display='block';
+  });
+  function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+</script>
+</body>
+</html>
